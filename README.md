@@ -11,7 +11,25 @@ Bronze ingestion, PySpark curates Silver/Gold data, a transparent seven-day base
 forecasts sales, and Power BI-ready exports support a Vietnam province revenue map.
 No paid cloud account is required.
 
-![Streaming e-commerce architecture](docs/architecture.svg)
+<p align="center">
+  <img src="docs/assets/architecture-realtime-commerce.svg" alt="Real-time e-commerce streaming architecture" width="100%">
+</p>
+
+<p align="center">
+  <a href="presentation/realtime-ecommerce-vi/index.html"><strong>▶ Vietnamese visual walkthrough</strong></a>
+  ·
+  <a href="presentation/realtime-ecommerce-vi/realtime-ecommerce-vi-notes.md">Detailed Vietnamese notes</a>
+  ·
+  <a href="docs/assets/architecture-realtime-commerce.excalidraw">Editable Excalidraw source</a>
+</p>
+
+## At a glance
+
+| Events & transport | Trust & current state | Insights & forecast |
+|---|---|---|
+| ⚡ Created, updated, cancelled events | 🧹 Event-level deduplication + DQ | 📈 Daily sales and sales velocity |
+| 🚌 Kafka/Redpanda integration path | 🧾 Latest event wins per order | 🗺️ Vietnam province revenue map |
+| 🧪 Deterministic JSONL CI path | ⛔ Cancelled orders excluded from revenue | 🔭 Explainable seven-day forecast |
 
 ## Business problem
 
@@ -133,6 +151,7 @@ revenue, fixed forecast horizon, and generated dashboard inputs.
 ```text
 realtime_commerce/      producer, stream landing, curation, forecast, CLI
 docs/                   architecture, contract, model, operations
+presentation/           interactive Vietnamese walkthrough + speaker notes
 powerbi/                coordinates, dashboard specification, generated exports
 tests/                  deterministic and end-to-end stream tests
 .github/workflows/      quality and Compose verification

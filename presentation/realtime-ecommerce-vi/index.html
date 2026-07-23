@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Real-time E-commerce Insights — Bản trình bày tiếng Việt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=DM+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#142027;--muted:#58676f;--paper:#f8faf7;--card:#fff;--orange:#f05a22;--coral:#ff7657;--green:#09965c;--gold:#c58600;--purple:#7048e8;--red:#d93b4a;--line:#dbe5df}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{width:100%;height:100%;overflow:hidden;background:var(--paper);color:var(--ink)}
+    body{font-family:"Be Vietnam Pro",system-ui,sans-serif}
+    h1,h2,h3,.metric{font-family:"DM Sans",system-ui,sans-serif}
+    #viewport{position:fixed;inset:0 0 64px;overflow:hidden}
+    .slide{position:absolute;inset:0;display:none;opacity:0;padding:clamp(34px,5vh,76px) clamp(44px,6vw,118px);font-size:clamp(30px,2.05vw,40px);line-height:1.4;background:
+      radial-gradient(circle at 92% 0%,rgba(240,90,34,.11),transparent 31%),var(--paper)}
+    .slide.active{display:flex;opacity:1}
+    h1{font-size:clamp(58px,6.2vw,106px);line-height:1;letter-spacing:-.045em}
+    h2{font-size:clamp(46px,4.15vw,72px);line-height:1.08;letter-spacing:-.025em}
+    h3{font-size:clamp(28px,2.25vw,42px);line-height:1.2}
+    .eyebrow{font-size:clamp(21px,1.45vw,28px);text-transform:uppercase;letter-spacing:.13em;font-weight:800;color:var(--orange)}
+    .lead{font-size:clamp(32px,2.55vw,48px);color:var(--muted);max-width:28em}
+    .small{font-size:clamp(23px,1.55vw,30px);color:var(--muted)}
+    .accent{color:var(--orange)}
+    .stack{display:flex;flex-direction:column;gap:clamp(18px,2.8vh,34px)}
+    .row{display:flex;gap:clamp(18px,2vw,32px);align-items:stretch}
+    .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2vw,30px)}
+    .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,1.7vw,26px)}
+    .card{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:24px;padding:clamp(20px,2.2vw,36px);box-shadow:0 14px 38px rgba(36,70,50,.08)}
+    .card p{font-size:clamp(24px,1.65vw,32px);color:var(--muted);margin-top:.45em}
+    .tag{display:inline-flex;align-items:center;width:max-content;padding:.42em .75em;border-radius:999px;background:#ffebe3;color:var(--orange);font-size:clamp(21px,1.45vw,28px);font-weight:700}
+    .metric{font-size:clamp(46px,4.1vw,74px);font-weight:700;line-height:1;color:var(--orange)}
+    .flow{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .flow .node{flex:1;text-align:center;background:white;border:2px solid var(--line);border-radius:22px;padding:1em .55em;font-weight:700}
+    .arrow{color:var(--orange);font-weight:900}
+    .code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:#16211d;color:#effcf5;border-radius:22px;padding:1em 1.2em;font-size:clamp(22px,1.5vw,29px);line-height:1.7}
+    .architecture{width:100%;height:min(70vh,730px);object-fit:contain;background:white;border:1px solid var(--line);border-radius:24px;box-shadow:0 18px 48px rgba(36,70,50,.12)}
+    .callout{border-left:8px solid var(--orange);padding:.35em 0 .35em .75em;font-weight:650}
+    .check{display:flex;gap:.55em;align-items:flex-start}.check::before{content:"✓";color:var(--green);font-weight:900}
+    .event{display:grid;grid-template-columns:1fr 1.4fr;gap:.7em 1em;font-size:clamp(22px,1.45vw,28px)}.event b{color:var(--orange)}
+    #nav{position:fixed;left:0;right:0;bottom:0;height:64px;z-index:50;display:flex;align-items:center;justify-content:center;gap:18px;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+    #nav button{cursor:pointer;border:0;background:transparent;color:var(--ink);padding:8px 12px;font:700 17px "Be Vietnam Pro"}
+    #nav button:disabled{opacity:.25;cursor:default}
+    #dots{display:flex;gap:7px;align-items:center;max-width:52vw;overflow:hidden}
+    .dot{width:9px;height:9px;padding:0!important;border-radius:999px;background:#cbd8d1!important;transition:.2s;flex:none}.dot.active{width:26px;background:var(--orange)!important}
+    #counter{font-size:17px;color:var(--muted);min-width:68px;text-align:center}
+    @media(max-width:900px){.grid3{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}.slide{font-size:28px}.architecture{height:58vh}}
+  </style>
+</head>
+<body>
+<main id="viewport">
+  <section class="slide active" style="justify-content:space-between">
+    <span class="tag">STREAMING DATA • PORTFOLIO WALKTHROUGH</span>
+    <div class="stack">
+      <p class="eyebrow">Real-time E-commerce</p>
+      <h1>Insights & Forecast</h1>
+      <p class="lead">Từ sự kiện đơn hàng liên tục đến doanh thu theo tỉnh, sales velocity và dự báo 7 ngày.</p>
+    </div>
+    <div class="row small" style="justify-content:space-between"><span>PySpark · Kafka/Redpanda · Docker · Power BI</span><span>15 slide • Tiếng Việt</span></div>
+  </section>
+
+  <section class="slide stack" style="justify-content:center">
+    <p class="eyebrow">01 — Bài toán</p>
+    <h2>Báo cáo cuối ngày là quá chậm cho thương mại điện tử</h2>
+    <div class="grid3">
+      <article class="card"><h3>Trạng thái đổi liên tục</h3><p>Đơn hàng có thể created, updated hoặc cancelled sau nhiều sự kiện.</p></article>
+      <article class="card"><h3>Nhu cầu theo vùng</h3><p>Doanh thu và vận tốc bán thay đổi khác nhau giữa các tỉnh.</p></article>
+      <article class="card"><h3>Quyết định cần sớm</h3><p>Vận hành cần tín hiệu gần thời gian thực, không chờ batch ngày hôm sau.</p></article>
+    </div>
+    <p class="callout">Mục tiêu: xử lý event an toàn, tái dựng đúng trạng thái đơn và xuất data mart cho BI.</p>
+  </section>
+
+  <section class="slide stack" style="justify-content:center">
+    <p class="eyebrow">02 — Event contract</p>
+    <h2>Mọi sự kiện phải tự mô tả đủ để kiểm chứng</h2>
+    <div class="grid2">
+      <article class="card event">
+        <b>event_id</b><span>khóa idempotency</span>
+        <b>order_id</b><span>khóa trạng thái đơn</span>
+        <b>event_type</b><span>created / updated / cancelled</span>
+        <b>event_ts</b><span>UTC timestamp</span>
+        <b>province</b><span>chuẩn hóa tỉnh Việt Nam</span>
+        <b>amount</b><span>giá trị giao dịch</span>
+      </article>
+      <div class="stack">
+        <p class="check">Schema rõ giúp producer và consumer độc lập.</p>
+        <p class="check">event_id giúp loại duplicate khi retry.</p>
+        <p class="check">event_ts giúp chọn trạng thái mới nhất.</p>
+        <p class="check">Dữ liệu sai contract đi vào quarantine.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide stack" style="padding-top:30px;padding-bottom:28px">
+    <div><p class="eyebrow">03 — Kiến trúc tổng thể</p><h2>Streaming thật, đường CI xác định, cùng một logic</h2></div>
+    <img class="architecture" src="../../docs/assets/architecture-realtime-commerce.png" alt="Sơ đồ Real-time E-commerce Insights được vẽ bằng Excalidraw">
+  </section>
+
+  <section class="slide stack" style="justify-content:center">
+    <p class="eyebrow">04 — Hai nguồn vào</p>
+    <h2>Một đường cho trải nghiệm thật, một đường cho kiểm thử lặp lại</h2>
+    <div class="grid2">
+      <article class="card" style="border-color:#ffc1a8">
+        <span class="tag">KAFKA / REDPANDA</span>
+        <h3 style="margin-top:.6em">Streaming integration</h3>
+        <p>Producer phát sự kiện liên tục; Spark đọc topic qua Kafka API.</p>
+      </article>
+      <article class="card" style="border-color:#b9e2ca">
+        <span class="tag" style="background:#e8f7ef;color:var(--green)">JSONL FILES</span>
+        <h3 style="margin-top:.6em">Deterministic CI</h3>
+        <p>Cùng schema, cùng transform; chạy nhanh và ổn định trên GitHub Actions.</p>
+      </article>
+    </div>
+    <p class="small">Đường file không “giả vờ là Kafka”; nó kiểm chứng logic dữ liệu. Kafka path kiểm chứng tích hợp streaming thật.</p>
+  </section>
+
+  <section class="slide stack" style="justify-content:center">
+    <p class="eyebrow">05 — Structured Streaming</p>
+    <h2>Checkpoint biến “đã xử lý tới đâu?” thành trạng thái bền vững</h2>
+    <div class="flow">
+      <div class="node">Micro-batch<br><span class="small">đọc offset mới</span></div>
+      <span class="arrow">→</span>
+      <div class="node">Transform<br><span class="small">dedup + DQ</span></div>
+      <span class="arrow">→</span>
+      <div class="node">Commit<br><span class="small">Bronze/Silver/Gold</span></div>
+      <span class="arrow">→</span>
+      <div class="node">Checkpoint<br><span class="small">lưu tiến độ</span></div>
+    </div>
+    <div class="grid2">
+      <article class="card"><div class="metric">0</div><h3>bản ghi mới khi chạy lại</h3><p>Nếu không có event mới, checkpoint ngăn xử lý lặp.</p></article>
+      <article class="card"><div class="metric" style="color:var(--green)">51</div><h3>Kafka high-watermark</h3><p>Demo tích hợp đã đọc và ghi nhận offset thật.</p></article>
+    </div>
+  </section>
+
+  <section class="slide stack" style="justify-content:center">
+    <p class="eyebrow">06 — Medallion</p>
+    <h2>Mỗi lớp trả lời một câu hỏi khác nhau</h2>
+    <div class="grid3">
+      <article class="card"><h3 style="color:var(--orange)">Bronze</h3><p>“Hệ thống đã nhận những event nào?” Giữ event occurrence và metadata ingest.</p></article>
+      <article class="card"><h3>Silver</h3><p>“Event nào hợp lệ?” Deduplicate, chuẩn hóa, kiểm tra schema và business rules.</p></article>
+      <article class="card"><h3 style="color:var(--green)">Current state</h3><p>“Đơn đang ở trạng thái nào?” Chọn event mới nhất theo từng order_id.</p></article>
+    </div>
+    <p class="small">Quarantine lưu bản ghi không hợp lệ cùng lý do; không làm “biến mất” dữ liệu lỗi.</p>
+  </section>
+
+  <section class="slide stack" style="justify-content:center">
+    <p class="eyebrow">07 — Trạng thái đơn hàng</p>
+    <h2>Sự kiện là lịch sử; doanh thu cần trạng thái hiện tại</h2>
+    <div class="flow">
+      <div class="node">Order #A<br><span class="small">created · 09:00</span></div>
+      <span class="arrow">→</span>
+      <div class="node">Order #A<br><span class="small">updated · 09:08</span></div>
+      <span class="arrow">→</span>
+      <div class="node" style="border-color:#f1a8af;background:#fff1f2">Order #A<br><span class="small">cancelled · 09:14</span></div>
+    </div>
+    <div class="grid2">
+      <article class="card"><h3>Current order state</h3><p>Window theo order_id, sắp xếp event_ts giảm dần, lấy bản ghi mới nhất.</p></article>
+      <article class="card"><h3 style="color:var(--red)">Cancelled ≠ Revenue</h3><p>Đơn hủy vẫn tồn tại trong lịch sử nhưng bị loại khỏi doanh thu hoạt động.</p></article>
+    </div>
+  </section>
+
+  <section class="slide stack" style="justify-content:center">
+    <p class="eyebrow">08 — Gold + Forecast</p>
+    <h2>Bốn data product, một nhịp ra quyết định</h2>
+    <div class="grid2">
+      <article class="card"><h3>Daily Sales</h3><p>Doanh thu, số đơn và AOV theo ngày.</p></article>
+      <article class="card"><h3>Province Revenue</h3><p>So sánh nhu cầu và đóng góp doanh thu theo tỉnh.</p></article>
+      <article class="card"><h3>Sales Velocity</h3><p>Tốc độ phát sinh đơn/doanh thu theo cửa sổ thời gian.</p></article>
+      <article class="card"><h3>7-day Forecast</h3><p>Dự báo ngắn hạn để hỗ trợ tồn kho và kế hoạch bán.</p></article>
+    </div>
+  </section>
+
+  <section class="slide stack" style="justify-content:center">
+    <p class="eyebrow">09 — Power BI</p>
+    <h2>Ba góc nhìn: hôm nay, ở đâu, sắp tới</h2>
+    <div class="grid3">
+      <article class="card"><h3>Sales Pulse</h3><p>Doanh thu hiện tại, số đơn, AOV và sales velocity.</p></article>
+      <article class="card"><h3>Vietnam Map</h3><p>Heatmap theo tỉnh để tìm vùng cầu cao hoặc suy giảm.</p></article>
+      <article class="card"><h3>7-day Outlook</h3><p>So sánh actual với forecast và theo dõi sai số.</p></article>
+    </div>
+    <p class="callout">Power BI đọc data mart; trạng thái đơn và logic loại cancelled được xử lý trước đó.</p>
+  </section>
+
+  <section class="slide stack" style="justify-content:center">
+    <p class="eyebrow">10 — Chạy local</p>
+    <h2>Quan sát streaming thật mà không cần tài khoản Azure</h2>
+    <div class="grid2">
+      <div class="code">docker compose up -d<br>make demo<br>make kafka-smoke<br>make test</div>
+      <div class="stack small">
+        <p class="check">Redpanda cung cấp Kafka API local.</p>
+        <p class="check">Producer phát created / updated / cancelled.</p>
+        <p class="check">Checkpoint chứng minh replay an toàn.</p>
+        <p class="check">CI dùng JSONL path để kết quả xác định.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide stack" style="justify-content:center">
+    <p class="eyebrow">11 — Bằng chứng chạy thật</p>
+    <h2>1.400 event sau dedup, 1.183 trạng thái đơn hiện tại</h2>
+    <div class="grid3">
+      <article class="card"><div class="metric">1,358</div><h3>accepted</h3><p>42 quarantined; accepted + quarantined = 1,400.</p></article>
+      <article class="card"><div class="metric" style="color:var(--green)">1,150</div><h3>active orders</h3><p>33 đơn cancelled được giữ lịch sử nhưng loại khỏi doanh thu.</p></article>
+      <article class="card"><div class="metric" style="color:var(--gold)">8.75B</div><h3>VND revenue</h3><p>694 dòng daily sales, 12 tỉnh và forecast 7 ngày.</p></article>
+    </div>
+    <p class="small">Bronze 1,428 → deduplicated 1,400 → duplicate 28; sales velocity 999 dòng.</p>
+  </section>
+
+  <section class="slide stack" style="justify-content:center">
+    <p class="eyebrow">12 — Local → Azure</p>
+    <h2>Giữ nguyên pattern, thay hạ tầng triển khai</h2>
+    <div class="grid2">
+      <article class="card">
+        <h3>Trong repo</h3>
+        <p>Redpanda · local filesystem/MinIO · PySpark · Docker · Power BI files.</p>
+      </article>
+      <article class="card" style="background:#fff6f1;border-color:#ffcab5">
+        <h3>Ánh xạ khi có cloud</h3>
+        <p>Event Hubs/Kafka · ADLS/Delta · Databricks · managed orchestration · Power BI Service.</p>
+      </article>
+    </div>
+    <p class="callout">Repo không tuyên bố đã triển khai Azure; nó chứng minh kiến trúc và hành vi cốt lõi bằng môi trường local.</p>
+  </section>
+
+  <section class="slide stack" style="justify-content:center">
+    <p class="eyebrow">13 — Điều dự án chứng minh</p>
+    <h2>Streaming tốt là xử lý đúng cả dữ liệu đến muộn, trùng và bị hủy</h2>
+    <div class="grid2">
+      <div class="stack">
+        <p class="check">Event contract và schema enforcement.</p>
+        <p class="check">Checkpoint, replay và idempotency.</p>
+        <p class="check">Tái dựng current state từ event history.</p>
+        <p class="check">Gold marts + forecast phục vụ quyết định.</p>
+      </div>
+      <article class="card" style="background:#fff0e9;border-color:#ffbea5">
+        <h3>Cách nói trong phỏng vấn</h3>
+        <p>“Tôi tách kiểm chứng transform khỏi kiểm chứng Kafka integration, để CI ổn định nhưng vẫn có smoke test streaming thật.”</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="slide" style="align-items:center;justify-content:center;text-align:center">
+    <div class="stack" style="align-items:center;max-width:30em">
+      <p class="eyebrow">Tóm tắt</p>
+      <h1 style="font-size:clamp(54px,5.4vw,92px)">Đúng trạng thái.<br><span class="accent">Đúng thời điểm.</span></h1>
+      <p class="lead">Một pipeline streaming có thể chạy lại, kiểm chứng và giải thích từ event đến dashboard.</p>
+      <p class="small">Mở file ghi chú đi kèm để đọc phần giải thích chi tiết theo từng slide.</p>
+    </div>
+  </section>
+</main>
+
+<nav id="nav">
+  <button id="prev" aria-label="Slide trước">← Trước</button>
+  <div id="dots"></div>
+  <span id="counter"></span>
+  <button id="next" aria-label="Slide sau">Sau →</button>
+</nav>
+<script>
+  const slides=[...document.querySelectorAll(".slide")],dotsBox=document.getElementById("dots"),counter=document.getElementById("counter"),prevBtn=document.getElementById("prev"),nextBtn=document.getElementById("next");let current=0;
+  slides.forEach((_,i)=>{const d=document.createElement("button");d.className="dot";d.setAttribute("aria-label",`Slide ${i+1}`);d.onclick=()=>go(i);dotsBox.appendChild(d)});
+  const dots=[...dotsBox.children];
+  function render(){slides.forEach((s,i)=>s.classList.toggle("active",i===current));dots.forEach((d,i)=>d.classList.toggle("active",i===current));counter.textContent=`${current+1} / ${slides.length}`;prevBtn.disabled=current===0;nextBtn.disabled=current===slides.length-1}
+  function go(i){current=Math.max(0,Math.min(slides.length-1,i));render()}
+  prevBtn.onclick=()=>go(current-1);nextBtn.onclick=()=>go(current+1);
+  addEventListener("keydown",e=>{if(["ArrowRight"," ","PageDown"].includes(e.key)){e.preventDefault();go(current+1)}else if(["ArrowLeft","PageUp"].includes(e.key)){e.preventDefault();go(current-1)}else if(e.key==="Home")go(0);else if(e.key==="End")go(slides.length-1)});
+  render();
+</script>
+</body>
+</html>
