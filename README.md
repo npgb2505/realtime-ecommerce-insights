@@ -16,10 +16,6 @@ No paid cloud account is required.
 </p>
 
 <p align="center">
-  <a href="presentation/realtime-ecommerce-vi/index.html"><strong>▶ Vietnamese visual walkthrough</strong></a>
-  ·
-  <a href="presentation/realtime-ecommerce-vi/realtime-ecommerce-vi-notes.md">Detailed Vietnamese notes</a>
-  ·
   <a href="docs/assets/architecture-realtime-commerce.excalidraw">Editable Excalidraw source</a>
 </p>
 
@@ -151,7 +147,6 @@ revenue, fixed forecast horizon, and generated dashboard inputs.
 ```text
 realtime_commerce/      producer, stream landing, curation, forecast, CLI
 docs/                   architecture, contract, model, operations
-presentation/           interactive Vietnamese walkthrough + speaker notes
 powerbi/                coordinates, dashboard specification, generated exports
 tests/                  deterministic and end-to-end stream tests
 .github/workflows/      quality and Compose verification
